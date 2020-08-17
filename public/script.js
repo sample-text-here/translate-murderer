@@ -4,12 +4,12 @@
 // prints "hi" in the browser's dev tools console
 console.log("hi");
 const textareas = document.querySelectorAll("textarea");
-var socket = io(location.origin + ":5000");
 
 fetch("port")
   .then((res) => res.text())
   .then((res) => {
-    port = location.origin + ":" + res;
+    socket = io(location.origin + ":" + res);
+    document.querySelector("span").innerText = "Ready!";
   });
 
 async function doit() {
