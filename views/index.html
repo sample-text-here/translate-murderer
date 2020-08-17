@@ -1,0 +1,42 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A cool thing made with Glitch">
+
+    <title>Welcome to Glitch!</title>
+
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+     <h1>Translate murderer</h1>
+
+    <p>Automatically translate text through Google Translate!</p>
+
+    <textarea
+      placeholder="e.g. A toaster is an atomic small appliance designed to expose various types of sliced bread to radiant heat, browning the bread so it becomes toast."
+      rows="10"
+      cols="50"
+    ></textarea
+    ><br />
+
+    <button onclick="doit()">Do the thing!</button> <span></span><br /><br>
+
+    <textarea placeholder="Output" readonly rows="10" cols="50"></textarea>
+
+    <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+    <div class="glitchButton" style="position:fixed;top:2em;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js" defer></script>
+  </body>
+</html>
