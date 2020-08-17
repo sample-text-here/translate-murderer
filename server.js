@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("port", (req, res) => {
+app.get("/port", (req, res) => {
   res.send(process.env.PORT || 5000);
 });
 
