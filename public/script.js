@@ -12,8 +12,8 @@ fetch("port")
     document.querySelector("span").innerText = "Ready!";
     socket.on("part", function (text) {
       textareas[1].value = text;
-      document.querySelector("button").removeAttribute("disabled");
     });
+    document.querySelector("button").removeAttribute("disabled");
   });
 
 async function doit() {
