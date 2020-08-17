@@ -102,5 +102,5 @@ module.exports = [
   "xh",
   "yi",
   "yo",
-  "zu"
+  "zu",
 ];

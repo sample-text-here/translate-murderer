@@ -9,12 +9,12 @@ const socket = io();
 async function doit() {
   document.querySelector("span").innerText = "Doing the thing!";
   var value = textareas[0].value;
-  socket.emit("translate", value, function(translated) {
+  socket.emit("translate", value, function (translated) {
     textareas[1].value = translated;
     document.querySelector("span").innerText = "Did the thing!";
   });
 }
 
-socket.on("part", function(text) {
+socket.on("part", function (text) {
   textareas[1].value = text;
 });

@@ -12,28 +12,28 @@ app.get("/", (request, response) => {
 });
 
 // listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
+const listener = app.listen(process.env.PORT || 3000, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
 const io = require("socket.io")(listener);
-io.on("connection", socket => {
-  socket.on("translate", async function(text, callback) {
+io.on("connection", (socket) => {
+  socket.on("translate", async function (text, callback) {
     let lang = randLang();
     text = await translate(text, {
       from: settings.using,
-      to: lang
+      to: lang,
     });
     for (let i = 0; i <= settings.duration; i++) {
       text = await translate(text, {
         from: lang,
-        to: (lang = randLang())
+        to: (lang = randLang()),
       });
       socket.emit("part", text);
     }
     text = await translate(text, {
       from: lang,
-      to: settings.using
+      to: settings.using,
     });
     callback(text);
   });
