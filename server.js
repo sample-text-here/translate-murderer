@@ -12,12 +12,8 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/port", (req, res) => {
-  res.send(process.env.PORT || 5000);
-});
-
 // listen for requests :)
-const listener = app.listen(process.env.PORT || 5000, () => {
+const listener = app.listen(process.env.PORT || 3000, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
 

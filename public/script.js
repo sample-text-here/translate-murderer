@@ -4,17 +4,7 @@
 // prints "hi" in the browser's dev tools console
 console.log("hi");
 const textareas = document.querySelectorAll("textarea");
-
-fetch("port")
-  .then((res) => res.text())
-  .then((res) => {
-    socket = io(location.origin + ":" + res);
-    document.querySelector("span").innerText = "Ready!";
-    socket.on("part", function (text) {
-      textareas[1].value = text;
-    });
-    document.querySelector("button").removeAttribute("disabled");
-  });
+const socket = io();
 
 async function doit() {
   document.querySelector("span").innerText = "Doing the thing!";
@@ -24,3 +14,7 @@ async function doit() {
     document.querySelector("span").innerText = "Did the thing!";
   });
 }
+
+socket.on("part", function (text) {
+  textareas[1].value = text;
+});
