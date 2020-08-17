@@ -19,12 +19,13 @@ const listener = app.listen(process.env.PORT || 80, () => {
 const io = require("socket.io")(listener);
 io.on("connection", (socket) => {
   socket.on("translate", async function (text, callback) {
-    console.log(text);
     let lang = randLang();
+
     text = await translate(text, {
       from: settings.using,
       to: lang,
     });
+    console.log(text);
     for (let i = 0; i <= settings.duration; i++) {
       text = await translate(text, {
         from: lang,
