@@ -4,7 +4,7 @@
 // prints "hi" in the browser's dev tools console
 console.log("hi");
 const textareas = document.querySelectorAll("textarea");
-const socket = io(location.origin.replace(/https?/, "ws") + ":80");
+const socket = io();
 
 async function doit() {
   document.querySelector("span").innerText = "Doing the thing!";

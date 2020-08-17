@@ -12,7 +12,7 @@ app.get("/", (request, response) => {
 });
 
 // listen for requests :)
-const listener = app.listen(80, () => {
+const listener = app.listen(process.env.PORT || 80, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
