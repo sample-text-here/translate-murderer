@@ -26,10 +26,14 @@ io.on("connection", (socket) => {
       to: lang,
     });
     for (let i = 0; i <= settings.duration; i++) {
-      text = await translate(text, {
-        from: lang,
-        to: (lang = randLang()),
-      });
+      try {
+        text = await translate(text, {
+          from: lang,
+          to: (lang = randLang()),
+        });
+      } catch (err) {
+        console.log(err);
+      }
       socket.emit("part", text);
     }
     text = await translate(text, {
