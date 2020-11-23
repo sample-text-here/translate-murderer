@@ -1,49 +1,27 @@
-const translate = require("translate-google");
+console.log("starting app...");
+const path = require("path");
+const translate = require(path.join(__dirname, "lib", "translate.js"));
 const express = require("express");
-const langs = require("./langs.js");
 const fs = require("fs");
+console.log("starting server...");
 const app = express();
-
-const settings = { duration: 10, using: "en" };
-
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
+  res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT || 3000, () => {
-  console.log("Your app is listening on port " + listener.address().port);
+  console.log(
+    "Success! Translate murderer is listening on port " +
+      listener.address().port
+  );
 });
 
 const io = require("socket.io")(listener);
 io.on("connection", (socket) => {
-  socket.on("translate", async function (text, callback) {
-    let lang = randLang();
-    text = await translate(text, {
-      from: settings.using,
-      to: lang,
-    });
-    for (let i = 0; i <= settings.duration; i++) {
-      try {
-        text = await translate(text, {
-          from: lang,
-          to: (lang = randLang()),
-        });
-      } catch (err) {
-        console.log(err);
-      }
-      socket.emit("part", text);
-    }
-    text = await translate(text, {
-      from: lang,
-      to: settings.using,
-    });
-    callback(text);
-  });
+  socket.on("translate", (text, callback) =>
+    translate(text, (part) => socket.emit("part", part), callback)
+  );
 });
-
-function randLang() {
-  return langs[Math.floor(Math.random() * langs.length)];
-}
